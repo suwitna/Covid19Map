@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             mc:Ignorable="d"
+             x:Class="Covid19Map.View.CovidMapAddPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolbarSave" Text="บันทึก COVID-19" Order="Primary" Priority="0"/>
+        <!--
+        <ToolbarItem x:Name="ToolbarCancel" Text="ยกเลิก" Order="Primary" Priority="1"/>
+        <ToolbarItem x:Name="ToolbarSave" Text="บันทึก" Order="Primary" Priority="2"/>
+        -->
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" Grid.ColumnSpan="3" VerticalOptions="StartAndExpand" Padding="0">
+                <maps:Map WidthRequest="350" HeightRequest="350" 
+                          x:Name="MyMap"
+                          IsShowingUser="True"
+                          MapType="Street"
+                          />
+            </StackLayout>
+            <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                <Label x:Name="txtLat"/>
+                <Label x:Name="txtLong"/>
+            </StackLayout>
+            <StackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                <Entry x:Name="txtLabel" Placeholder="พื้นที่" WidthRequest="340" BackgroundColor="#ffb3ba"/>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                <Entry x:Name="txtAddress" Placeholder="รายละเอียด" WidthRequest="340" BackgroundColor="#ffb3ba"/>
+            </StackLayout>
+            <StackLayout Grid.Row="4" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                <Label Text="วันที่พบผู้ติดเชื้อ COVID-19:" FontSize="16"/>
+            </StackLayout>
+            <StackLayout Grid.Row="4" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                <DatePicker x:Name="FoundDate" Format="dd/MM/yyyy" FontSize="16" BackgroundColor="#ffb3ba"/>
+            </StackLayout>
+            <!--
+            <StackLayout Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <ListView x:Name="lstPersons">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}"></TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="btnAdd" Text="Add" WidthRequest="200"/>
+                <Button x:Name="btnUpdate" Text="Update" WidthRequest="200"/>
+            </StackLayout>
+            -->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

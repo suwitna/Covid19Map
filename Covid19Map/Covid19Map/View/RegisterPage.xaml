@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Covid19Map.Views.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="White"  Margin="0,0,0,20" VerticalOptions="StartAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="#3DBCFF">
+                    <Label Text="สมัครสมาชิก" TextColor="White" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="3">
+                    <Entry Placeholder="ชื่อผู้ใช้งาน" FontSize="16" x:Name="EntryUserName"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2" Grid.ColumnSpan="3">
+                    <Entry Placeholder="รหัสผ่าน" IsPassword="true" FontSize="16" x:Name="EntryUserPassword"/>
+                </StackLayout>
+                <StackLayout Grid.Row="5" Grid.Column="1">
+                    <Button Text="ลงทะเบียน" CornerRadius="10" HorizontalOptions="CenterAndExpand" WidthRequest="200" FontSize="Medium" TextColor="White" BackgroundColor="#0077be" Clicked="Button_Clicked"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
