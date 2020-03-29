@@ -22,6 +22,7 @@ namespace Covid19Map.View
 
         private async void BtnViewCovidMap_Clicked(object sender, EventArgs e)
         {
+            /*
             try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
@@ -51,6 +52,8 @@ namespace Covid19Map.View
             {
                 // Unable to get location
             }
+            */
+            await Navigation.PushAsync(new CovidMapViewPage());
         }
 
         protected async override void OnAppearing()
@@ -63,6 +66,7 @@ namespace Covid19Map.View
 
         private async void BtnAddCovidMap_Clicked(object sender, EventArgs e)
         {
+            /*
             try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
@@ -92,6 +96,8 @@ namespace Covid19Map.View
             {
                 // Unable to get location
             }
+            */
+            await Navigation.PushAsync(new CovidMapAddPage());
         }
     }
 }

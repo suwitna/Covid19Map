@@ -16,7 +16,7 @@ namespace Covid19Map.View
     {
         FirebaseHelper firebaseHelper = new FirebaseHelper();
         bool onInit = false;
-        double zoomMeters = 10000;
+        double zoomMeters = 3000;
 
         public CovidMapViewPage()
         {
@@ -89,7 +89,6 @@ namespace Covid19Map.View
                         Label = item.PinLabel,
                         Address = item.PinAddress,
                     };
-
                     MyMap.Pins.Add(pin);
                 }
             }

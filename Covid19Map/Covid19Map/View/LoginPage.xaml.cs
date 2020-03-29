@@ -1,4 +1,5 @@
 ﻿using Covid19Map.Tables;
+using Covid19Map.View;
 using SQLite;
 using System;
 using System.IO;

@@ -1,4 +1,5 @@
 ﻿using Covid19Map.MenuItems;
+using Covid19Map.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,8 @@ namespace Covid19Map.Views
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
 
             MasterPageItem item = new MasterPageItem();
-            item.TargetType = typeof(LocationTrackerPage);
-            item.Title = "ประวัติการเดินทาง";
+            item.TargetType = typeof(CovidMapListPage);
+            item.Title = "ข้อมูลพิกัด Covid-19";
             item.Icon = "list_b.png";
 
             var page = (Page)Activator.CreateInstance(item.TargetType);

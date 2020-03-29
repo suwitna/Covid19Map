@@ -138,7 +138,6 @@ namespace Covid19Map.Views
                     Label = "ข้อมูลพิกัดล่าสุด(" + username + ")",
                     Address = "พิกัด: " + position.Latitude.ToString() + ", " + position.Longitude.ToString(),
                     Name = username,
-                    Time = datetime.ToString(),
                     Url = "www.google.co.th"
                 };
                 if (MyMap.VisibleRegion != null)
