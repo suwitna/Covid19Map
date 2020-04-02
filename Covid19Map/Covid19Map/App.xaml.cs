@@ -19,12 +19,15 @@ namespace Covid19Map
             //MainPage = new NavigationPage(new LocationTrackerPage());
 
             //version Nakhonphanom
-            MainPage = new NavigationPage(new CovidAtNKPPage());
+            // MainPage = new NavigationPage(new CovidAtNKPPage());
             /*
             InitializeComponent();
 
             MainPage = new MainPage();
             */
+
+            //Thailand
+            MainPage = new NavigationPage(new CovidMapThaiViewPage()); 
 
         }
 

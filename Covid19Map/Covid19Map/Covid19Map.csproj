@@ -11,13 +11,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="json1.json" />
+    <None Remove="thai.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="json1.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="4.5.0.495" />
   </ItemGroup>
@@ -29,11 +39,18 @@
   </ItemGroup>
   
   <ItemGroup>
+    <EmbeddedResource Include="thai.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Compile Update="View\CovidMapAddPage.xaml.cs">
       <DependentUpon>CovidMapAddPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\CovidMapListPage.xaml.cs">
       <DependentUpon>CovidMapListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\CovidMapThaiViewPage.xaml.cs">
+      <DependentUpon>CovidMapThaiViewPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   

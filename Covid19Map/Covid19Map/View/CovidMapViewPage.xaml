@@ -6,6 +6,17 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              x:Class="Covid19Map.View.CovidMapViewPage">
+    <NavigationPage.TitleView>
+        <Grid>
+            <Label x:Name="titleName" Text="พื้นที่พบผู้ติดเชื้อ/เตือนระวัง" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" FontSize="16"></Label>
+            <Grid HorizontalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnRefresh" Text="ปรับปรุง" HorizontalOptions="End"/>
+            </Grid>
+        </Grid>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>

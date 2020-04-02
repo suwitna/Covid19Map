@@ -16,8 +16,15 @@ namespace Covid19Map.View
         public CovidMapListPage()
         {
             InitializeComponent();
+            popupLoadingView.IsVisible = true;
+            activityIndicator.IsRunning = true;
             btnAddCovidMap.Clicked += BtnAddCovidMap_Clicked;
             btnViewCovidMap.Clicked += BtnViewCovidMap_Clicked;
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
+                popupLoadingView.IsVisible = false;
+                activityIndicator.IsRunning = false;
+                return false;
+            });
         }
 
         private async void BtnViewCovidMap_Clicked(object sender, EventArgs e)

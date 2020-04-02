@@ -58,9 +58,17 @@ namespace Covid19Map.Views
             if (item == null)
                 return;
 
+            List<Page> li = Navigation.NavigationStack.ToList();
+            if (li.Count > 0) 
+            {
+                Page last = li.ElementAt(li.Count - 1);
+                Navigation.RemovePage(last);
+            }
+
             if (item.Id == 5)
             {
-                Device.BeginInvokeOnMainThread(async () => {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
                     var result = await this.DisplayAlert(null, "ต้องการออกจากระบบ?", "ตกลง", "ยกเลิก");
 
                     if (result)
@@ -82,11 +90,15 @@ namespace Covid19Map.Views
             else
             {
                 var page = (Page)Activator.CreateInstance(item.TargetType);
+
                 page.Title = item.Title;
 
-                Detail = new NavigationPage(page);
+                var currentPage = ((NavigationPage)((MasterDetailPage)Application.Current.MainPage).Detail).RootPage;
+                if (page.GetType() != currentPage.GetType())
+                { 
+                    Detail = new NavigationPage(page);
+                }
                 IsPresented = false;
-
                 MasterPage.ListView.SelectedItem = null;
             }
         }

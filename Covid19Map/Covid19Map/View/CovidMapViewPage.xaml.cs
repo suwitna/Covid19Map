@@ -21,6 +21,7 @@ namespace Covid19Map.View
         public CovidMapViewPage()
         {
             InitializeComponent();
+            btnRefresh.Clicked += BtnRefresh_Clicked;
             if (Application.Current.Properties.ContainsKey("USER_NAME"))
             {
                 var strLatitude = Application.Current.Properties["USER_LATITUDE"] as string;
@@ -43,7 +44,11 @@ namespace Covid19Map.View
             });
         }
 
-        
+        private async void BtnRefresh_Clicked(object sender, EventArgs e)
+        {
+            await RetreiveLocation();
+        }
+
         protected async override void OnAppearing()
         {
 
@@ -82,7 +87,7 @@ namespace Covid19Map.View
                 {
                     Position pos = new Position(Convert.ToDouble(item.Latitude), Convert.ToDouble(item.Longitude));
 
-                    CustomPin pin = new CustomPin
+                    Pin pin = new Pin
                     {
                         Type = PinType.Place,
                         Position = pos,

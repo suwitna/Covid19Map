@@ -49,7 +49,7 @@ namespace Covid19Map.Views
                 return false;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+            Device.StartTimer(TimeSpan.FromMinutes(30), () =>
             {
                 Task.Factory.StartNew(async () =>
                 {
@@ -131,14 +131,12 @@ namespace Covid19Map.Views
 
                 Position pos = new Position(position.Latitude, position.Longitude);
                 DateTime datetime = DateTime.Now;
-                CustomPin pin = new CustomPin
+                Pin pin = new Pin
                 {
                     Type = PinType.Place,
                     Position = pos,
                     Label = "ข้อมูลพิกัดล่าสุด(" + username + ")",
                     Address = "พิกัด: " + position.Latitude.ToString() + ", " + position.Longitude.ToString(),
-                    Name = username,
-                    Url = "www.google.co.th"
                 };
                 if (MyMap.VisibleRegion != null)
                 {

@@ -3,8 +3,10 @@ using Xamarin.Forms.Maps;
 
 namespace Covid19Map
 {
-    public class CustomMap : Map
-    {
-        public List<CustomPin> CustomPins { get; set; }
-    }
+	public class CustomMap : Map
+	{
+		public List<CustomPin> CustomPins { get; set; }
+		//public List<CustomCircle> Circles { get; set; }
+	}
 }
+

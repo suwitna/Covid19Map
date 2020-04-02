@@ -126,14 +126,12 @@ namespace Covid19Map.View
 
                 Position pos = new Position(position.Latitude, position.Longitude);
                 DateTime datetime = DateTime.Now;
-                CustomPin pin = new CustomPin
+                Pin pin = new Pin
                 {
                     Type = PinType.Place,
                     Position = pos,
                     Label = "ข้อมูลพิกัดล่าสุด(" + username + ")",
                     Address = "พิกัด: " + position.Latitude.ToString() + ", " + position.Longitude.ToString(),
-                    Name = username,
-                    Url = "www.google.co.th"
                 };
                 if (MyMap.VisibleRegion != null)
                 {

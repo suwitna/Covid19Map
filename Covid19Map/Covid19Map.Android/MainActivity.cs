@@ -22,6 +22,8 @@ namespace Covid19Map.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.FormsMaps.Init(this, savedInstanceState);
+                                                                        //...
+
 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
             // CrossCurrentActivity.Current.Activity is still NULL
