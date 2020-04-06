@@ -56,7 +56,7 @@ namespace Covid19Map.View
         {
             latitude = 17.3773698;
             longitude = 104.7608508;
-            await RefreshDataAsync();
+            await RetreiveLocation();
         }
 
         public static async Task RefreshDataAsync()
@@ -86,10 +86,11 @@ namespace Covid19Map.View
 
         protected async override void OnAppearing()
         {
-            Task.Run(async () => await RetreiveData());
+            //Task.Run(async () => await RetreiveData());
            // Task.Run(async () => await RetreiveLocation());
 
             base.OnAppearing();
+            await RetreiveLocation();
         }
         private async Task RetreiveData()
         {

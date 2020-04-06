@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Covid19Map.Model
 {
-    class MapHistory
+    public class MapHistory
     {
         public string LoginName { get; set; }
         public string Accuracy { get; set; }

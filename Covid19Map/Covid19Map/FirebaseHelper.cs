@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Covid19Map
 {
-    class FirebaseHelper
+    public class FirebaseHelper
     {
         FirebaseClient firebase = new FirebaseClient("https://maplocation-4b2a1.firebaseio.com/");
         public async Task<List<Person>> GetAllPersons()
@@ -112,6 +112,77 @@ namespace Covid19Map
             await firebase
               .Child("CovidMap")
               .PostAsync(covid);
+        }
+
+        //MapTracking
+        public async Task AddMapTracking(MapTracking data)
+        {
+            await firebase
+              .Child("MapTracking")
+              .PostAsync(data);
+        }
+
+        public async Task<List<MapTracking>> GetAllMapTracking()
+        {
+            return (await firebase
+              .Child("MapTracking")
+              .OnceAsync<MapTracking>()).Select(item => new MapTracking
+              { 
+                  RowKey = item.Key,
+                  LoginName = item.Object.LoginName,
+                  AdressName = item.Object.AdressName,
+                  DistrictName = item.Object.DistrictName,
+                  ProvinceName = item.Object.ProvinceName,
+                  CountryName = item.Object.CountryName,
+                  PostalCode = item.Object.PostalCode,
+                  Latitude = item.Object.Latitude,
+                  Longitude = item.Object.Longitude,
+                  IsActive = item.Object.IsActive,
+                  CreateDate = item.Object.CreateDate,
+                  UpdateDate = item.Object.UpdateDate
+              }).ToList();
+        }
+
+        public async Task<List<MapTracking>> GetMapTrackingByLoginName(string login)
+        {
+            return (await firebase
+              .Child("MapTracking")
+              .OnceAsync<MapTracking>()).Select(item => new MapTracking
+              {
+                  RowKey = item.Key,
+                  LoginName = item.Object.LoginName,
+                  AdressName = item.Object.AdressName,
+                  DistrictName = item.Object.DistrictName,
+                  ProvinceName = item.Object.ProvinceName,
+                  CountryName = item.Object.CountryName,
+                  PostalCode = item.Object.PostalCode,
+                  Latitude = item.Object.Latitude,
+                  Longitude = item.Object.Longitude,
+                  IsActive = item.Object.IsActive,
+                  CreateDate = item.Object.CreateDate,
+                  UpdateDate = item.Object.UpdateDate
+              }).Where(a => a.LoginName == login).OrderBy(a => a.CreateDate).ToList();
+        }
+
+        public async Task<List<MapTracking>> GetMapTrackingByDate(string login, DateTime date)
+        {
+            return (await firebase
+              .Child("MapTracking")
+              .OnceAsync<MapTracking>()).Select(item => new MapTracking
+              {
+                  RowKey = item.Key,
+                  LoginName = item.Object.LoginName,
+                  AdressName = item.Object.AdressName,
+                  DistrictName = item.Object.DistrictName,
+                  ProvinceName = item.Object.ProvinceName,
+                  CountryName = item.Object.CountryName,
+                  PostalCode = item.Object.PostalCode,
+                  Latitude = item.Object.Latitude,
+                  Longitude = item.Object.Longitude,
+                  IsActive = item.Object.IsActive,
+                  CreateDate = item.Object.CreateDate,
+                  UpdateDate = item.Object.UpdateDate
+              }).Where(a => (a.LoginName == login && a.CreateDate.Date.ToString("dd-MM-yyyy") == date.Date.ToString("dd-MM-yyyy"))).OrderBy(a => a.CreateDate).ToList();
         }
     }
 }

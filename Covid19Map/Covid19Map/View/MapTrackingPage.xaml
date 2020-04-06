@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:controls="clr-namespace:XamForms.Controls;assembly=XamForms.Controls.Calendar"
+             mc:Ignorable="d"
+             x:Class="Covid19Map.View.MapTrackingPage">
+    <NavigationPage.TitleView>
+        <Grid>
+            <Label x:Name="titleName" Text="ประวัติการเดินทาง" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" FontSize="16"></Label>
+            <Grid HorizontalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnRefresh" Text="ปรับปรุง" HorizontalOptions="End"/>
+            </Grid>
+        </Grid>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="250"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Grid.RowSpan="3" VerticalOptions="StartAndExpand" Padding="0">
+                    <maps:Map WidthRequest="360" HeightRequest="250" 
+                          x:Name="MyMap"
+                          IsShowingUser="True"
+                          MapType="Street"
+                          />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.RowSpan="3" VerticalOptions="StartAndExpand" Padding="0">
+                    <controls:Calendar x:Name="calendar"
+                                       TitleLabelFontSize="20"
+                                       WeekdaysFontSize="16"
+                                       TitleLeftArrowFontSize="16"
+                                       TitleRightArrowFontSize="16"
+                                       DatesFontSize="15"
+                                       SelectedFontSize="24"
+                                       
+                                       BorderColor ="#fafafb"
+                                       BorderWidth ="1"
+                                       BackgroundColor ="#3DBCFF"
+                                       StartDay ="Monday"
+                                       DatesBackgroundColor="#ebebf0"
+                                       DatesTextColor="Gray"
+                                       SelectedBorderColor ="Transparent"
+                                       SelectedBackgroundColor="Accent"
+                                       WeekdaysTextColor ="White"
+                                       WeekdaysFontFamily="Awesom"
+                                       TitleLabelTextColor="White"
+                                       HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="Center" 
+                                       WidthRequest="350" 
+                                       HeightRequest="310"
+                                       />
+                </StackLayout>
+            </Grid>
+            <!--Loading Popup-->
+            <ContentView x:Name="popupLoadingView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical" HeightRequest="150" WidthRequest="200">
+
+                        <ActivityIndicator x:Name="activityIndicator" Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Color="Black" WidthRequest="30" HeightRequest="30" ></ActivityIndicator>
+                        <Label x:Name="lblLoadingText" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Loading..."></Label>
+                    </StackLayout>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

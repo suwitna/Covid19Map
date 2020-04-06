@@ -8,7 +8,37 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<application android:label="Covid19Map.Android">
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.ACTION_RESCHEDULE" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <application android:label="Covid19Map.Android">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyB5qUVavHltwYOsmxgShp-wQv2PUge5Ny4" />
+    <!--
+    <service android:name=".BackgroundService" />
+    <receiver android:name=".BackgroundReceiver"
+              android:enabled="true"
+              android:exported="true"
+              android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <category android:name="android.intent.category.HOME" />
+      </intent-filter>
+    </receiver>
+    <receiver android:name=".BackgroundReceiver"/>
+    <service android:name=".PeriodicService" />
+    <service android:name=".BackgroundService" />
+    Java.Lang.IllegalStateException
+  Message=Not allowed to start service Intent { cmp=com.companyname.covid19map/crc642bf879e5e56cc350.BackgroundService }: app is in background uid UidRecord{25727f5 u0a403 RCVR bg:+1m0s104ms idle procs:1 seq(0,0,0)}
+
+
+    -->
+    <service android:name=".BackgroundService" />
+    <receiver android:name=".BackgroundReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </receiver>
 	</application>
 </manifest>

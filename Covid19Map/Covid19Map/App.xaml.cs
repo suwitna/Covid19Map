@@ -1,6 +1,7 @@
 ﻿using Covid19Map.View;
 using Covid19Map.Views;
 using System;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +14,7 @@ namespace Covid19Map
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             //Verion Login
-            //MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new LoginPage());
 
             //Verion report location
             //MainPage = new NavigationPage(new LocationTrackerPage());
@@ -27,12 +28,19 @@ namespace Covid19Map
             */
 
             //Thailand
-            MainPage = new NavigationPage(new CovidMapThaiViewPage()); 
+            //MainPage = new NavigationPage(new CovidMapThaiViewPage());
+
+            //Map Tracking
+            //MainPage = new NavigationPage(new MapTrackingPage());
+
+            //Background Service
+            //MainPage = new NavigationPage(new BackgroundServicePage());
 
         }
 
         protected override void OnStart()
         {
+            CreateNotificationChannel();
         }
 
         protected override void OnSleep()
@@ -41,6 +49,11 @@ namespace Covid19Map
 
         protected override void OnResume()
         {
+        }
+
+        private void CreateNotificationChannel()
+        {
+
         }
     }
 }

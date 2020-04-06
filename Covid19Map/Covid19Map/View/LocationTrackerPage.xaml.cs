@@ -20,6 +20,9 @@ namespace Covid19Map.Views
         FirebaseHelper firebaseHelper = new FirebaseHelper();
         bool onInit = false;
         double zoomMeters = 5000;
+        double latitude = 17.3773698;
+        double longitude = 104.7608508;
+        string login = "";
 
         public LocationTrackerPage()
         {
@@ -28,6 +31,8 @@ namespace Covid19Map.Views
             {
                 var strLatitude = Application.Current.Properties["USER_LATITUDE"] as string;
                 var strLongitude = Application.Current.Properties["USER_LATITUDE"] as string;
+                
+                login = Application.Current.Properties["USER_NAME"] as string;
                 MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(Convert.ToDouble(strLatitude), Convert.ToDouble(strLongitude))
                                  , Distance.FromMeters(zoomMeters)));
             }
@@ -41,14 +46,14 @@ namespace Covid19Map.Views
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        await firebaseHelper.DeleteMapHistor();
+                        //await firebaseHelper.DeleteMapHistor();
                         await RetreiveLocation();
                     });
 
                 });
                 return false;
             });
-
+            /*
             Device.StartTimer(TimeSpan.FromMinutes(30), () =>
             {
                 Task.Factory.StartNew(async () =>
@@ -61,7 +66,9 @@ namespace Covid19Map.Views
                 });
                 return true;
             });
+            */
         }
+
         /*
         private async void BtnUpdate_Clicked(object sender, EventArgs e)
         {
@@ -96,7 +103,7 @@ namespace Covid19Map.Views
                     // await this.Navigation.PopAsync(); // or anything else
                     if (Device.RuntimePlatform == Device.Android)
                     {
-                        //Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+                        Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
                     }
                 }
             });
@@ -111,7 +118,23 @@ namespace Covid19Map.Views
 
         private async void BtnGetLocation_Clicked(object sender, EventArgs e)
         {
-            await RetreiveLocation();
+            Device.BeginInvokeOnMainThread(async () => {
+                var result = await DisplayAlert("แจ้งพิกัด", "ต้องการแจ้งพิกัดปัจจุบันเข้าสู่ระบบ โปรดยืนยัน?", "ตกลง", "ยกเลิก");
+                if (result)
+                {
+                    await RetreiveLocation();
+                    await AddTrackingLocation();
+
+
+                    popupSavingView.IsVisible = true;
+                    Device.StartTimer(TimeSpan.FromSeconds(2), () => {
+                        popupSavingView.IsVisible = false;
+                        return false;
+                    });
+
+                }
+            });
+            
         }
 
         private async Task RetreiveLocation()
@@ -173,6 +196,70 @@ namespace Covid19Map.Views
             Console.WriteLine("Map history added Successfully");
             // var allPersons = await firebaseHelper.GetAllPersons();
             // lstPersons.ItemsSource = allPersons;
+        }
+
+        private async Task AddTrackingLocation()
+        {
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 20;
+
+            var position = await locator.GetPositionAsync(TimeSpan.FromTicks(10000));
+
+            if (MyMap.VisibleRegion != null)
+            {
+                Distance level = MyMap.VisibleRegion.Radius;
+                zoomMeters = level.Meters;
+
+                latitude = position.Latitude;
+                longitude = position.Longitude;
+            }
+            else
+            {
+                zoomMeters = 5000;
+                latitude = 17.3773698;
+                longitude = 104.7608508;
+            }
+
+            Geocoder geoCoder = new Geocoder();
+            var possibleAddresses = await geoCoder.GetAddressesForPositionAsync(new Position(latitude, longitude));
+            var placemarks = await Geocoding.GetPlacemarksAsync(latitude, longitude);
+            string district = "";
+            string province = "";
+            string country = "";
+            string postalcode = "";
+
+            string address = "";
+
+            foreach (var item in placemarks)
+            {
+                district = item.SubLocality != null ? item.SubLocality : item.SubAdminArea;
+                province = item.AdminArea;
+                country = item.CountryName;
+                postalcode = item.PostalCode;
+
+                break;
+            }
+
+            foreach (var item in possibleAddresses)
+            {
+                address = item.ToString();
+                break;
+            }
+
+            MapTracking tracking = new MapTracking();
+            tracking.LoginName = login;
+            tracking.AdressName = address;
+            tracking.DistrictName = district;
+            tracking.ProvinceName = province;
+            tracking.CountryName = country;
+            tracking.PostalCode = postalcode;
+            tracking.Latitude = latitude;
+            tracking.Longitude = longitude;
+            tracking.IsActive = "Y";
+            tracking.CreateDate = DateTime.Now;
+            tracking.UpdateDate = DateTime.Now;
+
+            await firebaseHelper.AddMapTracking(tracking);
         }
     }
 }

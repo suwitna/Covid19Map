@@ -21,8 +21,11 @@ namespace Covid19Map.Views
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
 
             MasterPageItem item = new MasterPageItem();
-            item.TargetType = typeof(CovidMapListPage);
-            item.Title = "ข้อมูลพิกัด Covid-19";
+            //item.TargetType = typeof(CovidMapListPage);
+            // item.Title = "ข้อมูลพิกัด Covid-19";
+
+            item.TargetType = typeof(CovidMapThaiViewPage);
+            item.Title = "ข้อมูลจากกรมควบคุมโรค";
             item.Icon = "list_b.png";
 
             var page = (Page)Activator.CreateInstance(item.TargetType);

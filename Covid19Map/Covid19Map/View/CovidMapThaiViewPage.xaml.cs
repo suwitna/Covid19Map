@@ -23,7 +23,7 @@ namespace Covid19Map.View
     public partial class CovidMapThaiViewPage : ContentPage
     {
         FirebaseHelper firebaseHelper = new FirebaseHelper();
-        bool onInit = false;
+        bool onInit = true;
         double zoomMeters = 600000;
         double latitude = 13.7560243;
         double longitude = 100.4986793;
@@ -35,7 +35,7 @@ namespace Covid19Map.View
             popupLoadingView.IsVisible = true;
             activityIndicator.IsRunning = true;
 
-            Device.StartTimer(TimeSpan.FromSeconds(7), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
                 Task.Factory.StartNew(async () =>
                 {
@@ -78,13 +78,35 @@ namespace Covid19Map.View
         private async void BtnRefresh_Clicked(object sender, EventArgs e)
         {
             //Task.Run(async () => await SyncCovidAnnounceData());
-            SyncProvinceList();
+            popupLoadingView.IsVisible = true;
+            activityIndicator.IsRunning = true;
+            await SyncProvinceList();
+            Device.StartTimer(TimeSpan.FromSeconds(0.1), () =>
+            {
+                Task.Factory.StartNew(async () =>
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        //await SyncProvinceList();
+                        popupLoadingView.IsVisible = false;
+                        activityIndicator.IsRunning = false;
+                    });
+
+                });
+                return false;
+            });
         }
 
         protected async override void OnAppearing()
         {
+            base.OnAppearing();
+            if(onInit)
+            {
+                onInit = false;
+                await SyncProvinceList();
+            }
             //SyncProvinceList();
-            this.Appearing += Page_Appearing;
+            //this.Appearing += Page_Appearing;
         }
 
         public async void Page_Appearing(object sender, EventArgs e)
@@ -182,6 +204,15 @@ namespace Covid19Map.View
                                     if (locDetail.Length > 0)
                                     {
                                         detail += i + ") " + data.Location.Trim();
+                                        if (data.Date != null && data.Time != null) 
+                                        {
+                                            detail += "(" + data.Date.ToString() + " เวลา: " + data.Time.ToString() + ")";
+                                        }
+                                        else if (data.Date != null && data.Time == null)
+                                        {
+                                            detail += "(" + data.Date.ToString() + ")";
+                                        }
+
                                         detail += "\n";
                                         i++;
                                     }

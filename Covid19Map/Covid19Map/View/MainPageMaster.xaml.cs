@@ -96,6 +96,7 @@ namespace Covid19Map.Views
                     new MainPageMasterMenuItem { Id = 1, Title = "ประวัติการเดินทาง", IconSource="list_b.png", TargetType = typeof(LocationTrackerPage)},
                     new MainPageMasterMenuItem { Id = 2, Title = "Covid-19 @ นครพนม ", IconSource="list_b.png", TargetType = typeof(CovidAtNKPPage)},
                     new MainPageMasterMenuItem { Id = 3, Title = "ข้อมูลพิกัด Covid-19", IconSource="setting_b.png", TargetType = typeof(CovidMapListPage)},
+                    new MainPageMasterMenuItem { Id = 4, Title = "ข้อมูลจากกรมควบคุมโรค", IconSource="setting_b.png", TargetType = typeof(CovidMapThaiViewPage)},   
                     new MainPageMasterMenuItem { Id = 5, Title = "ออกจากระบบ", IconSource="logout_b.png"},
                 });
             }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Covid19Map.Model
 {
-    class Person
+    public class Person
     {
         public int PersonId { get; set; }
         public string Name { get; set; }

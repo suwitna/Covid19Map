@@ -30,6 +30,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="4.5.0.495" />
+    <PackageReference Include="XamForms.Controls.Calendar" Version="1.1.1" />
   </ItemGroup>
   
   <ItemGroup>
@@ -43,6 +44,9 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Update="View\MapTrackingPage.xaml.cs">
+      <DependentUpon>MapTrackingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="View\CovidMapAddPage.xaml.cs">
       <DependentUpon>CovidMapAddPage.xaml</DependentUpon>
     </Compile>
@@ -55,6 +59,9 @@
   </ItemGroup>
   
   <ItemGroup>
+    <EmbeddedResource Update="View\BackgroundServicePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\CovidAtNKPPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

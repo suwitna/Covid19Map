@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Covid19Map.View.BackgroundServicePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="counter" FontAttributes="Bold" FontSize="Large"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Button Text="Start Service" HorizontalOptions="FillAndExpand" BackgroundColor="Green" TextColor="White" x:Name="StartService"/>
+            <Button Text="Stop Service" HorizontalOptions="FillAndExpand" BackgroundColor="Red" TextColor="White" x:Name="StopService"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
