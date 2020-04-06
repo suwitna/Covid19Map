@@ -25,10 +25,10 @@ namespace Covid19Map.View
         public CovidAtNKPPage()
         {
             InitializeComponent();
-            var currentPage = ((NavigationPage)((MasterDetailPage)Application.Current.MainPage).Detail).RootPage;
+            //var currentPage = ((NavigationPage)((MasterDetailPage)Application.Current.MainPage).Detail).RootPage;
 
-            if (currentPage.GetType() == typeof(CovidAtNKPPage))
-                return;
+            //if (currentPage.GetType() == typeof(CovidAtNKPPage))
+            //    return;
 
             popupLoadingView.IsVisible = true;
             activityIndicator.IsRunning = true;
@@ -56,7 +56,7 @@ namespace Covid19Map.View
         {
             latitude = 17.3773698;
             longitude = 104.7608508;
-            await RetreiveLocation();
+            await RetreiveData();
         }
 
         public static async Task RefreshDataAsync()
@@ -90,7 +90,7 @@ namespace Covid19Map.View
            // Task.Run(async () => await RetreiveLocation());
 
             base.OnAppearing();
-            await RetreiveLocation();
+            await RetreiveData();
         }
         private async Task RetreiveData()
         {
